@@ -1,0 +1,33 @@
+{
+  "name": "fyp-backend",
+  "version": "1.0.0",
+  "description": "fyp backend",
+  "main": "index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "env-cmd -f ./src/config/.env nodemon src/index.js",
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/farhan-helmy/openpetro-backend.git"
+  },
+  "keywords": [
+    "bck"
+  ],
+  "author": "farhan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/farhan-helmy/openpetro-backend/issues"
+  },
+  "homepage": "https://github.com/farhan-helmy/openpetro-backend#readme",
+  "dependencies": {
+    "bcrypt": "^5.0.0",
+    "env-cmd": "^10.1.0",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.11.13",
+    "nodemon": "^2.0.7",
+    "validator": "^13.5.2"
+  }
+}
