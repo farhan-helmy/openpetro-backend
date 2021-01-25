@@ -17,7 +17,7 @@ router.post('/customers', async (req, res) => {
         res.status(400).send(e)
     }
 })
-router.get('/customers', async (req, res) => {
+router.get('/customers',auth, async (req, res) => {
 
     try {
         const customers = await Customer.find({})

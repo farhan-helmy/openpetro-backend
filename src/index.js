@@ -1,6 +1,8 @@
 const express = require('express')
 require('./db/mongoose')
 const customerRouter = require('./routers/customer')
+const transactionRouter = require('./routers/transaction')
+
 
 
 const app = express()
@@ -15,6 +17,8 @@ const port = process.env.PORT
 // })
 app.use(express.json())
 app.use(customerRouter)
+app.use(transactionRouter)
+
 
 
 app.listen(port, ()=> {
