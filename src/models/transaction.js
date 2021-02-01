@@ -29,6 +29,12 @@ transactionSchema.virtual('stockused', {
     foreignField: 'transaction_id'
 })
 
+transactionSchema.virtual('sales', {
+    ref: 'Sales',
+    localField: 'price',
+    foreignField: 'sales'
+})
+
 const Transaction = mongoose.model('Transaction', transactionSchema)
 
 module.exports = Transaction

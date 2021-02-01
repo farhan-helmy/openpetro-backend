@@ -18,10 +18,12 @@ router.post('/transaction', auth, async (req, res) => {
     }
 })
 
-router.get('/transactions', async (req, res) => {
+router.get('/transactions', auth, async (req, res) => {
     try {
-        const transaction = await Transaction.find({})
-        res.send(transaction)
+        await req.customer.populate({
+            path: 'transaction'
+        }).execPopulate()
+        res.send(req.customer.transaction)
     } catch (e) {
         res.status(500).send()
     }
