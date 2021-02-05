@@ -18,6 +18,11 @@ const transactionSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         required: true,
         ref: 'Customer'
+    },
+    fuel_type:{
+        type: String,
+        trim: true,
+        default: 'Unknown'
     }
 }, {
     timestamps: true
