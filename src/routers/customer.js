@@ -3,7 +3,7 @@ const auth = require('../middleware/auth')
 const Customer = require('../models/customer')
 const router = new express.Router()
 
-router.post('/customers/register', async (req, res) => {
+router.post('/customers', async (req, res) => {
     const customer = new Customer(req.body)
 
     try {
@@ -63,11 +63,11 @@ router.patch('/customers/topup', auth, async (req, res) => {
     const allowed = ['topup_balance']
     const isValidOperation = updates.every((update) => allowed.includes(update))
 
-    if (!isValidOperation) {
-        return res.status(400).send({
-            error: 'invalid updates'
-        })
-    }
+    // if (!isValidOperation) {
+    //     return res.status(400).send({
+    //         error: 'invalid updates'
+    //     })
+    // }
     try {        
         updates.forEach((update) => req.customer[update] = req.body[update])
         //const user = await User.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true })

@@ -41,9 +41,9 @@ const customerSchema = new mongoose.Schema({
         }
     },
     topup_balance:{
-        type: mongoose.Decimal128,
+        type: Number,
         trim: true,
-        default: 0.00
+        
     },
     tokens: [{
         token: {
