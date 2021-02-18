@@ -23,7 +23,6 @@ jobs:
     - name: npm install and test
       run: |
         npm install
-        npm test
       env:
         CI: true
 
@@ -40,7 +39,7 @@ jobs:
         key: ${{ secrets.SSH_KEY }}
         port: ${{ secrets.SSH_PORT }}
         script: |
-          cd ~/node-github-demo
+          cd /home/openpetro-backend
           git pull origin master
           npm install --production
           pm2 restart node-app
