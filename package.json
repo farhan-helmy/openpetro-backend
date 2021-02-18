@@ -5,8 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node src/index.js",
-    "dev": "env-cmd -f ./src/config/.env nodemon src/index.js",
-    "test": "mocha ./test/* --exit"
+    "dev": "env-cmd -f ./src/config/.env nodemon src/index.js"
   },
   "repository": {
     "type": "git",
