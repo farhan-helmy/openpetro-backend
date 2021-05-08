@@ -30,5 +30,15 @@ router.get('/transactions', auth, async (req, res) => {
 
 })
 
+router.get('/transactions/all', async (req, res) => {
+    try {
+        const transaction = await Transaction.find({})
+        res.send(transaction)
+    } catch (e) {
+        res.status(500).send()
+    }
+
+})
+
 
 module.exports = router

@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const mongooseDateFormat = require('mongoose-date-format')
 
 const transactionSchema = new mongoose.Schema({
 
@@ -39,6 +40,8 @@ transactionSchema.virtual('sales', {
     localField: 'price',
     foreignField: 'sales'
 })
+
+transactionSchema.plugin(mongooseDateFormat)
 
 const Transaction = mongoose.model('Transaction', transactionSchema)
 

@@ -14,7 +14,7 @@ const fuelStockSchema = new mongoose.Schema({
    
 }, {
     timestamps: true
-})
+}) 
 
 fuelStockSchema.virtual('stockused',{
     ref: 'FuelStock',
