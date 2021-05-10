@@ -1,6 +1,7 @@
 const mongoose = require('mongoose')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
+const mongooseDateFormat = require('mongoose-date-format')
 
 const customerSchema = new mongoose.Schema({
 
@@ -33,15 +34,15 @@ const customerSchema = new mongoose.Schema({
         type: String,
         required: true,
         trim: true,
-        minlength: 7,
-        validate(value) {
-            if (value.includes('password')) {
-                throw new Error('Cannot use password password')
-            }
-        }
+        minlength: 7
     },
     topup_balance:{
         type: Number,
+        trim: true,
+        
+    },
+    feedback:{
+        type: String,
         trim: true,
         
     },
@@ -103,6 +104,8 @@ customerSchema.statics.findByCreds = async (email, password) => {
 
     return customer
 }
+
+
 //hash plain text pass
 customerSchema.pre('save', async function (next) {
     const customer = this
@@ -112,6 +115,9 @@ customerSchema.pre('save', async function (next) {
     }
     next()
 })
+
+customerSchema.plugin(mongooseDateFormat)
+
 const Customer = mongoose.model('Customer', customerSchema)
 
 module.exports = Customer

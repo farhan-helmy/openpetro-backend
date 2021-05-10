@@ -3,7 +3,7 @@ const auth = require('../middleware/auth')
 const Customer = require('../models/customer')
 const router = new express.Router()
 
-router.post('/customers', async (req, res) => {
+router.post('/customers/register', async (req, res) => {
     const customer = new Customer(req.body)
 
     try {
@@ -41,6 +41,16 @@ router.get('/customers',async (req, res) => {
     }
 })
 
+router.get('/customers/count',async (req, res) => {
+
+    try {
+        const customers = await Customer.countDocuments({})
+        res.send(customers)
+    } catch (e) {
+        res.status(500).send()
+    }
+})
+
 router.get('/customers/me', auth, async (req, res) => {
     res.send(req.customer)
 })
@@ -61,6 +71,28 @@ router.post('/customers/logout', auth, async (req, res) => {
 router.patch('/customers/topup', auth, async (req, res) => {
     const updates = Object.keys(req.body)
     const allowed = ['topup_balance']
+    const isValidOperation = updates.every((update) => allowed.includes(update))
+
+    // if (!isValidOperation) {
+    //     return res.status(400).send({
+    //         error: 'invalid updates'
+    //     })
+    // }
+    try {        
+        updates.forEach((update) => req.customer[update] = req.body[update])
+        //const user = await User.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true })
+        await req.customer.save()
+        res.send(req.customer)
+    } catch (e) {
+        res.status(400).send({
+            error: '?????'
+        })
+    }
+})
+
+router.post('/customers/feedback', auth, async (req, res) => {
+    const updates = Object.keys(req.body)
+    const allowed = ['feedback']
     const isValidOperation = updates.every((update) => allowed.includes(update))
 
     // if (!isValidOperation) {

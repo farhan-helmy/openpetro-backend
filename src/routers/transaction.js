@@ -32,7 +32,27 @@ router.get('/transactions', auth, async (req, res) => {
 
 router.get('/transactions/all', async (req, res) => {
     try {
-        const transaction = await Transaction.find({})
+        const transaction = await Transaction.find({}).populate({path: 'customer'}).sort({createdAt: 'desc'})
+        res.send(transaction)
+    } catch (e) {
+        res.status(500).send()
+    }
+
+})
+
+router.get('/transactions/ron95', async (req, res) => {
+    try {
+        const transaction = await Transaction.find({fueltype:"95"}).populate({path: 'customer'}).sort({createdAt: 'desc'})
+        res.send(transaction)
+    } catch (e) {
+        res.status(500).send()
+    }
+
+})
+
+router.get('/transactions/all', async (req, res) => {
+    try {
+        const transaction = await Transaction.find({}).populate({path: 'customer'}).sort({createdAt: 'desc'})
         res.send(transaction)
     } catch (e) {
         res.status(500).send()
